@@ -1,0 +1,18 @@
+{
+	"name": "Elfoslav/elfoslav-nette-sandbox",
+	"description": "Nette sandbox with Doctrine, GettextTranslator, HAML filter",
+	"config": {
+		"vendor-dir": "./libs"
+	},
+	"autoload": {
+		"classmap":
+			["libs/nette-ext/HamlFilter/"]
+	},
+	"require": {
+		"nette/nette": "@dev",
+		"nella/doctrine": "@dev",
+		"nella/console": "@dev",
+		"doctrine/migrations": "@dev",
+		"schmutzka/gettexttranslator": ">= 2.0.2"
+	}
+}

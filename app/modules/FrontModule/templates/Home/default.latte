@@ -1,0 +1,12 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+	<h1>Hi, I am ElfoslavNetteSandbox</h1>
+
+	<a n:href="Blog:">See my blog</a>
+
+	<ul>
+		<li n:foreach="$articles as $article">
+			<a n:href="Blog:show $article->slug">{$article->title}</a>
+		</li>
+	</ul>

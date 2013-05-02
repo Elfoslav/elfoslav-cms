@@ -1,0 +1,69 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+	parameters:
+		database:
+			driver: pdo_mysql
+			host: localhost
+			dbname: nette_doctrine
+			user: freya
+			password:
+			charset: utf8
+			collation: utf8_czech_ci
+	gettextTranslator:
+		lang: en
+		files:
+			front: %appDir%/modules/FrontModule/lang # for module Front and other non-specified modules
+			#admin: %appDir%/modules/AdminModule/lang # for module Admin
+		# optional with defaults
+		layout: horizontal # or: vertical
+		height: 450
+
+
+	php:
+		date.timezone: Europe/Prague
+		session.save_path: "%tempDir%/sessions"
+		# zlib.output_compression: yes
+
+	nette:
+		session:
+			autoStart: smart
+
+	doctrine:
+		connection: %database%
+		entityDirs:
+			- %appDir%/
+		proxy:
+			dir: %appDir%/doctrine/proxies
+		metadataCache­Driver: ''
+		annotationCache­Driver: ''
+		queryCacheDriver: ''
+
+		console: true
+
+	migrations:
+		connection: @doctrine.connection
+		directory: %appDir%/doctrine/migrations
+
+	services:
+		database: @doctrine.entityManager
+		authenticator: Models\Authenticator( @database::getRepository('Entities\User') )
+		articleRepository:
+			class: \Repositories\ArticleRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Article') )
+
+	factories:
+
+
+production < common:
+
+
+development < common:
+	parameters:
+		database:
+			dbname: nette_doctrine
+			user: freya
+			password:

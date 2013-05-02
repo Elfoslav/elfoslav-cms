@@ -1,0 +1,3 @@
+[submodule "libs/HamlFilter"]
+	path = libs/HamlFilter
+	url = https://github.com/Mikulas/nette-templating-haml

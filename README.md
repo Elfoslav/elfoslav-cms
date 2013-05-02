@@ -1,7 +1,7 @@
-Elfoslav Nette Sandbox
+ElfoslavCMS
 ======================
 
-###Nette sandbox with Doctrine (using Nella\Doctrine), GettextTranslator, HAML filter
+###CMS based on [Elfoslav Nette sandbox](https://github.com/Elfoslav/elfoslav-nette-sandbox)
 
 Installation:
 ------------

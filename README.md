@@ -1,16 +1,19 @@
 Elfoslav Nette Sandbox
 ======================
 
-Nette sandbox with Doctrine (using Nella\Doctrine), GettextTranslator, HAML filter
------------------------------------------------------------
+###Nette sandbox with Doctrine (using Nella\Doctrine), GettextTranslator, HAML filter
 
 Installation:
 ------------
 Clone or download this repository.
 In project directory run:
+
 `composer install`
+
 then
+
 `composer update`
+
 and update your database connection in `config.neon`
 
 License

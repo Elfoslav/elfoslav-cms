@@ -5,8 +5,4 @@
 
 	<a n:href="Blog:">See my blog</a>
 
-	<ul>
-		<li n:foreach="$articles as $article">
-			<a n:href="Blog:show $article->slug">{$article->title}</a>
-		</li>
-	</ul>
+	{include ../includes/@articles.latte}

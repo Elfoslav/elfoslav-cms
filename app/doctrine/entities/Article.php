@@ -10,7 +10,7 @@ use \Doctrine\ORM\Mapping as ORM,
  * @ORM\Table(name="Article")
  * @ORM\HasLifecycleCallbacks
  */
-class Article extends BaseEntity
+class Article extends Page
 {
 	/**
 	 * @ORM\Id
@@ -19,6 +19,7 @@ class Article extends BaseEntity
 	 * @var int
 	 */
 	private $id;
+
 	/**
 	 * @ORM\Column(type="string", unique=true, length=103)
 	 * @var string
@@ -29,11 +30,6 @@ class Article extends BaseEntity
 	 * @var string
 	 */
 	protected $content;
-	/**
-	 * @ORM\Column(type="string", unique=true)
-	 * @var string
-	 */
-	protected $slug;
 
 	protected $category;
 
@@ -59,11 +55,20 @@ class Article extends BaseEntity
 		$this->setUpdated(new \DateTime());
 	}
 
+	public function fromArray(Array $arr) {
+		parent::fromArray($arr);
+		$this->setUpdatedValue();
+	}
+
 	/**
 	 * @ORM\PreUpdate
 	 */
 	public function setUpdatedValue() {
 		$this->setUpdated(new \DateTime());
+	}
+
+	public function getId() {
+		return $this->id;
 	}
 
     function setTitle($value){
@@ -80,14 +85,6 @@ class Article extends BaseEntity
 
     function getContent(){
         return $this->content;
-    }
-
-    function setSlug($value){
-        $this->slug = $value;
-    }
-
-    function getSlug(){
-        return $this->slug;
     }
 
     function setCategory($value){

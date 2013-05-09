@@ -2,8 +2,4 @@
 	<h1>hi i am a blog page</h1>
 	<p><a n:href=":Admin:Blog:create">Create article</a></p>
 
-	<ul>
-		<li n:foreach="$articles as $article">
-			<a n:href="Blog:show $article->slug">{$article->title}</a>
-		</li>
-	</ul>
+	{include ../includes/@articles.latte}

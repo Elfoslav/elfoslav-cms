@@ -1,0 +1,8 @@
+<ul>
+	<li n:foreach="$articles as $article">
+		<p><a n:href="Blog:show $article->slug">{$article->getTitle()} {dump $article}</a></p>
+		<p>Created at: {$article->getCreated()|date}</p>
+		<p>Updated at: {$article->getUpdated()|date}</p>
+		<a n:href=":Admin:Blog:update $article->getId()">Update</a>
+	</li>
+</ul>

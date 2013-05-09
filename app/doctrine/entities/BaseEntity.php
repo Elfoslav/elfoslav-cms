@@ -25,45 +25,40 @@ abstract class BaseEntity extends \Nette\Object
 		foreach($arr as $property => $value) {
 			$this->$property = $value;
 		}
-
-		if(!$this->slug)
-			$this->slug = Strings::webalize($this->title);
 	}
 
-	public function __call($name, $arguments) {
-		$get = $set = FALSE;
+	public function toArray() {
+        $reflection = new \ReflectionClass($this);
+        $details = array();
+        foreach ($reflection->getProperties(\ReflectionProperty::IS_PROTECTED) as $property) {
+            if (!$property->isStatic()) {
+                $value = $this->{$property->getName()};
 
-		if (preg_match('/^get/', $name)) {
-			$name = preg_replace('/^get(.*)/', '\1', $name);
-			$get = TRUE;
-		} elseif (preg_match('/^set/', $name)) {
-			$name = preg_replace('/^set(.*)/', '\1', $name);
-			$set = TRUE;
-		} else {
-			throw new \BadMethodCallException('Calling an undefined method "' . $name . '".');
-		}
+                if ($value instanceof IEntity) {
+                    $value = $value->getId();
+                } elseif ($value instanceof ArrayCollection || $value instanceof PersistentCollection) {
+                    $value = array_map(function (BaseEntity $entity) {
+                        return $entity->getId();
+                    }, $value->toArray());
+                }
+                $details[$property->getName()] = $value;
+            }
+        }
+		foreach ($reflection->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
+            if (!$property->isStatic()) {
+                $value = $this->{$property->getName()};
 
-		$name[0] = strtolower($name[0]);
-		preg_replace_callback('/[A-Z]/', function($c) {
-			return '_' . strtolower($c[0]);
-		}, $name);
+                if ($value instanceof IEntity) {
+                    $value = $value->getId();
+                } elseif ($value instanceof ArrayCollection || $value instanceof PersistentCollection) {
+                    $value = array_map(function (BaseEntity $entity) {
+                        return $entity->getId();
+                    }, $value->toArray());
+                }
+                $details[$property->getName()] = $value;
+            }
+        }
+        return $details;
+    }
 
-		//$reflection = $this->getReflection();
-		//if (!$reflection->hasProperty($name)) {
-		//
-		//	if ($get AND Strings::endsWith(strtolower($name), self::IDENTIFIER_KEY)
-		//		AND $reflection->hasProperty($association = substr($name, 0, strlen($name) - 2))
-		//		AND ($this->$association instanceof Entity OR $reflection->implementsInterface('Doctrine\ORM\Proxy\Proxy'))) {
-		//		$em = $arguments[0];
-		//		$indentifier = $em->getUnitOfWork()->getEntityIdentifier($this->$association);
-		//		return $indentifier[self::IDENTIFIER_KEY];
-		//	}
-		//	throw new \BadMethodCallException('Calling a undefined method "' . $name . '".');
-		//}
-
-		if ($get)
-			return $this->$name;
-		else
-			$this->$name = $arguments[0];
-	}
 }

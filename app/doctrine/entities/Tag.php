@@ -9,8 +9,8 @@ use \Doctrine\ORM\Mapping as ORM;
  *
  * Tag for Article
  *
- * @ORM\Entity
- * @ORM\Table(name="tag")
+ * @ORM\Entity(repositoryClass="Repositories\TagRepository")
+ * @ORM\Table(name="tags")
  */
 class Tag extends BasePage
 {
@@ -29,7 +29,7 @@ class Tag extends BasePage
 	protected $title;
 
 	/**
-     * @ORM\ManyToMany(targetEntity="Article")
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
      * @var array
      **/
 	protected $articles;

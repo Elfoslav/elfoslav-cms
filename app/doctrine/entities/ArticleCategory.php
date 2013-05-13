@@ -9,7 +9,8 @@ use \Doctrine\ORM\Mapping as ORM;
  *
  * Category for Article
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Repositories\ArticleCategoryRepository")
+ * @ORM\Table(name="articlecategories")
  */
 class ArticleCategory extends BasePage
 {
@@ -28,7 +29,7 @@ class ArticleCategory extends BasePage
 	protected $title;
 
 	/**
-     * @ORM\ManyToMany(targetEntity="Article")
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="categories")
      * @var array
      **/
 	protected $articles;

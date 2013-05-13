@@ -6,7 +6,7 @@ use \Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Repositories\ArticleRepository")
- * @ORM\Table(name="article")
+ * @ORM\Table(name="articles")
  * @ORM\HasLifecycleCallbacks
  */
 class Article extends BasePage
@@ -32,12 +32,12 @@ class Article extends BasePage
 	protected $content;
 
 	/**
-     * @ORM\ManyToMany(targetEntity="ArticleCategory")
+     * @ORM\ManyToMany(targetEntity="ArticleCategory", inversedBy="articles")
      **/
 	protected $categories;
 
 	/**
-     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
      **/
 	protected $tags;
 

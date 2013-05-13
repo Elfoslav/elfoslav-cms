@@ -46,7 +46,6 @@ class BlogPresenter extends SecuredPresenter
 
 		$tags = $this->tagRepository->findAll();
 		$tagNames = PageHelper::getPagesNamesString($tags);
-		dump($tagNames);
 		$this['createArticleForm']['tagsMultiple']
 			->setAttribute('data-autocomplete', $tagNames);
 	}

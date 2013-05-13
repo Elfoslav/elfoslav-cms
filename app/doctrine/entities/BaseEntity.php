@@ -2,8 +2,6 @@
 
 namespace Entities;
 
-use \Nette\Utils\Strings;
-
 /**
  * @author Tomáš Hromník <tom.hromnik@gmail.com>
  *
@@ -23,7 +21,12 @@ abstract class BaseEntity extends \Nette\Object
 
 	public function fromArray(Array $arr) {
 		foreach($arr as $property => $value) {
-			$this->$property = $value;
+			$setter = 'set' . ucfirst($property);
+			if(method_exists($this, $setter)) {
+				$this->$setter($value);
+			} else {
+				throw new \Nette\MemberAccessException('Method "' . $setter . '" does not exist in class "' . get_class($this) .'"');
+			}
 		}
 	}
 

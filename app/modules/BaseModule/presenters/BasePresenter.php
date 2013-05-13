@@ -76,4 +76,32 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
         $this->articleRepository = $articleRepository;
     }
+
+	/** @var Repositories\ArticleCategoryRepository */
+    protected $articleCategoryRepository;
+
+    /**
+     * @param Repositories\ArticleCategoryRepository
+     */
+    public function injectArticleCategoryRepository(\Repositories\ArticleCategoryRepository $articleCategoryRepository)
+    {
+		if ($this->articleCategoryRepository) {
+            throw new Nette\InvalidStateException('ArticleCategoryRepository has already been set');
+        }
+        $this->articleCategoryRepository = $articleCategoryRepository;
+    }
+
+	/** @var Repositories\TagRepository */
+	protected $tagRepository;
+
+	/**
+     * @param Repositories\TagRepository
+     */
+    public function injectTagRepository(\Repositories\TagRepository $tagRepository)
+    {
+		if ($this->tagRepository) {
+            throw new Nette\InvalidStateException('TagRepository has already been set');
+        }
+        $this->tagRepository = $tagRepository;
+    }
 }

@@ -55,6 +55,10 @@ common:
 		authenticator: Models\Authenticator( @database::getRepository('Entities\User') )
 		articleRepository:
 			class: \Repositories\ArticleRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Article') )
+		articleCategoryRepository:
+			class: \Repositories\ArticleCategoryRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\ArticleCategory') )
+		tagRepository:
+			class: \Repositories\TagRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Tag') )
 
 	factories:
 

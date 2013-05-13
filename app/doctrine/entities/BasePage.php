@@ -2,23 +2,18 @@
 
 namespace Entities;
 
-use \Nette\Utils\Strings;
+use \Doctrine\ORM\Mapping as ORM,
+	\Nette\Utils\Strings;
 
 /**
  * @author Tomáš Hromník <tom.hromnik@gmail.com>
  *
- * Base entity class for all entities
+ * Base Page
+ *
+ * @ORM\MappedSuperclass
  */
-class Page extends BaseEntity
+abstract class BasePage extends BaseEntity
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 * @var int
-	 */
-	private $id;
-
 	/**
 	 * @ORM\Column(type="string", unique=true)
 	 * @var string
@@ -32,12 +27,8 @@ class Page extends BaseEntity
 			$this->slug = Strings::webalize($this->title);
 	}
 
-	public function getId() {
-		return $this->id;
-	}
-
 	function setSlug($value){
-        $this->slug = $value;
+        $this->slug = Strings::webalize($value);
     }
 
     function getSlug(){

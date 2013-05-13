@@ -1,3 +1,6 @@
 [submodule "libs/nette-ext/HamlFilter"]
 	path = libs/nette-ext/HamlFilter
 	url = git://github.com/Mikulas/nette-templating-haml.git
+[submodule "www/select2"]
+	path = www/select2
+	url = git://github.com/ivaynberg/select2.git

@@ -9,7 +9,7 @@ use \Nette\Security as NS;
  * Users authenticator.
  *
  * @author     Tomáš Hromník
- * @package    MyApplication
+ * @package    ElfoslavCMS
  */
 class Authenticator extends \Nette\Object implements NS\IAuthenticator
 {

@@ -2,15 +2,14 @@
 
 namespace Entities;
 
-use \Doctrine\ORM\Mapping as ORM,
-	\Nette\Utils\Strings;
+use \Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Repositories\ArticleRepository")
- * @ORM\Table(name="Article")
+ * @ORM\Table(name="article")
  * @ORM\HasLifecycleCallbacks
  */
-class Article extends Page
+class Article extends BasePage
 {
 	/**
 	 * @ORM\Id
@@ -21,17 +20,26 @@ class Article extends Page
 	private $id;
 
 	/**
-	 * @ORM\Column(type="string", unique=true, length=103)
+	 * @ORM\Column(type="string", unique=true, length=150)
 	 * @var string
 	 */
 	protected $title;
+
 	/**
 	 * @ORM\Column(type="text")
 	 * @var string
 	 */
 	protected $content;
 
-	protected $category;
+	/**
+     * @ORM\ManyToMany(targetEntity="ArticleCategory")
+     **/
+	protected $categories;
+
+	/**
+     * @ORM\ManyToMany(targetEntity="Tag")
+     **/
+	protected $tags;
 
 	/**
 	 * @ORM\Column(type="datetime")
@@ -71,51 +79,70 @@ class Article extends Page
 		return $this->id;
 	}
 
-    function setTitle($value){
+    public function setTitle($value){
+		if(!$this->slug) {
+			$this->setSlug($value);
+		}
         $this->title = $value;
     }
 
-    function getTitle(){
+    public function getTitle(){
         return $this->title;
     }
 
-    function setContent($value){
+    public function setContent($value){
         $this->content = $value;
     }
 
-    function getContent(){
+    public function getContent(){
         return $this->content;
     }
 
-    function setCategory($value){
-        $this->category = $value;
+	public function addCategory($category ){
+		$this->categories[] = $category;
+	}
+
+    public function setCategories($value){
+        $this->categories = $value;
     }
 
-    function getCategory(){
-        return $this->category;
+    public function getCategories(){
+        return $this->categories;
     }
 
-    function setCreated($value){
+	public function addTag($tag) {
+		$this->tags[] = $tag;
+	}
+
+	public function setTags($value) {
+		$this->tags = $value;
+	}
+
+	public function getTags() {
+		return $this->tags;
+	}
+
+    public function setCreated($value){
         $this->created = $value;
     }
 
-    function getCreated(){
+    public function getCreated(){
         return $this->created;
     }
 
-    function setUpdated($value){
+    public function setUpdated($value){
         $this->updated = $value;
     }
 
-    function getUpdated(){
+    public function getUpdated(){
         return $this->updated;
     }
 
-    function setPublished($value){
+    public function setPublished($value){
         $this->published = $value;
     }
 
-    function getPublished(){
+    public function getPublished(){
         return $this->published;
     }
 

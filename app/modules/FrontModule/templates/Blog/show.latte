@@ -1,4 +1,18 @@
+{block title} {$article->getTitle()} {/block}
+
 {block content}
 	{dump $article}
 <h1>{$article->title}</h1>
 <p>{!$article->content}</p>
+<p>
+	{_'Kategórie'}:
+	<small n:foreach="$article->getCategories() as $cat">
+		<a n:href="Blog:showCategory $cat->getSlug()">{$cat->getTitle()}</a>{if !$iterator->last},{/if}
+	</small>
+</p>
+<p>
+	{_'Tagy'}:
+	<small n:foreach="$article->getTags() as $tag">
+		<a n:href="Blog:showTag $tag->getSlug()">{$tag->getTitle()}</a>{if !$iterator->last},{/if}
+	</small>
+</p>

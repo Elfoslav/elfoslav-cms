@@ -10,7 +10,7 @@ use \Nette\Application\UI,
  * Sign in/out presenters.
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 class SignPresenter extends BasePresenter
 {

@@ -5,7 +5,7 @@ namespace AdminModule;
  * Homepage presenter
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 class HomePresenter extends SecuredPresenter
 {

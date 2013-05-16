@@ -1,0 +1,12 @@
+{block content}
+
+<h1>{_'Užívatelia'}</h1>
+
+<ul>
+	<li n:foreach="$users as $user">
+		{_'Meno'}: {$user->getUsername()}<br>
+		{_'Email'} {$user->getEmail()}<br>
+		<a n:href="User:update $user->getId()">{_'Upraviť'}</a>
+		<a n:href="User:delete $user->getId()">{_'Vymazať'}</a>
+	</li>
+</ul>

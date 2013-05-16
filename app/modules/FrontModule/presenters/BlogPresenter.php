@@ -5,7 +5,7 @@ namespace FrontModule;
  * Blog presenter
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 class BlogPresenter extends \BaseModule\BasePresenter
 {

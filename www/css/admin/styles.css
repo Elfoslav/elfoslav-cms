@@ -38,3 +38,12 @@ a[href^="error:"] {
 .hide {
 	display: none;
 }
+
+.sidebar {
+	float: left;
+	margin-right: 35px;
+}
+
+.content {
+	float: left;
+}

@@ -59,6 +59,8 @@ common:
 			class: \Repositories\ArticleCategoryRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\ArticleCategory') )
 		tagRepository:
 			class: \Repositories\TagRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Tag') )
+		userRepository:
+			class: \Repositories\UserRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\User') )
 
 	factories:
 

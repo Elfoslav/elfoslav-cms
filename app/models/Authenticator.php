@@ -37,10 +37,10 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator
 		}
 
 		if ($user->getPassword() !== $this->calculateHash($password, $user->getPassword())) {
-			throw new NS\AuthenticationException("Invalid password. " . $user->getPassword(), self::INVALID_CREDENTIAL);
+			throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
 		}
 
-		return new NS\Identity($user->getId(), $user->getRole(), array(
+		return new NS\Identity($user->getId(), NULL, array(
 			'username' => $user->getUsername(),
 			'email' => $user->getEmail(),
 		));
@@ -53,7 +53,7 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator
 	 * @param  string
 	 * @return string
 	 */
-	public function calculateHash($password, $salt = null)
+	public static function calculateHash($password, $salt = null)
 	{
 		if ($salt === null) {
 			$salt = '$2a$07$' . \Nette\Utils\Strings::random(22);

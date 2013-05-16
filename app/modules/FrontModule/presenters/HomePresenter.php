@@ -5,13 +5,13 @@ namespace FrontModule;
  * Homepage presenter.
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 class HomePresenter extends \BaseModule\BasePresenter
 {
 
 	public function actionCreateDefaultUser() {
-		$user = new \Entities\User('admin');
+		$user = new \Entities\User('admin2');
 		$user->setPassword($this->getContext()->authenticator->calculateHash('mypassword'));
 		$user->setEmail('your@eail.com')->setRole('admin');
 

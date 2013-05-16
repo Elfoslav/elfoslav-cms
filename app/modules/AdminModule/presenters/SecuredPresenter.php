@@ -5,7 +5,7 @@ namespace AdminModule;
  * Secured presenter
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 class SecuredPresenter extends BasePresenter
 {

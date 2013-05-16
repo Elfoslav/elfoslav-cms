@@ -7,7 +7,7 @@
 		<p>
 			{_'Kategórie'}:
 			<small n:foreach="$article->getCategories() as $cat">
-				{$cat->getTitle()}{if !$iterator->last},{/if}
+				<a n:href="Blog:showCategory $cat->getSlug()">{$cat->getTitle()}</a>{if !$iterator->last},{/if}
 			</small>
 		</p>
 		<a n:href=":Admin:Blog:update $article->getId()">Update</a>

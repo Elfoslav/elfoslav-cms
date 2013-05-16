@@ -34,7 +34,18 @@
 
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-		{include #content}
+		<div class="cf">
+			<div n:if="$user->isLoggedIn()" class="sidebar">
+				<p><a href="{plink Sign:out}">Logout</a></p>
+				<p><a n:href=":Admin:User:create">{_'Nový užívateľ'}</a></p>
+				<p><a n:href=":Admin:User:">{_'Zobraziť užívateľov'}</a></p>
+				<p><a n:href=":Admin:Blog:create">{_'Nový článok'}</a></p>
+				<p><a n:href=":Front:Blog:">{_'Zobraziť blog'}</a></p>
+			</div>
+			<div class="content">
+				{include #content}
+			</div>
+		</div>
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>

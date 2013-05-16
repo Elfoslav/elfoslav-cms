@@ -38,17 +38,12 @@ class User extends BaseEntity
 	 * @var string
 	 */
 	protected $password;
-	/**
-	 * @ORM\Column
-	 * @var string
-	 */
-	private $role;
 
 	/**
 	 * @param string
 	 * @return User
 	 */
-	public function __construct($username)
+	public function __construct($username = NULL)
 	{
 		$this->username = static::normalizeString($username);
 	}
@@ -67,6 +62,11 @@ class User extends BaseEntity
 	public function getUsername()
 	{
 		return $this->username;
+	}
+
+	public function setUsername($username) {
+		$this->username = $username;
+		return $this;
 	}
 
 	/**
@@ -102,24 +102,6 @@ class User extends BaseEntity
 	public function setEmail($email)
 	{
 		$this->email = static::normalizeString($email);
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getRole()
-	{
-		return $this->role;
-	}
-
-	/**
-	 * @param string
-	 * @return User
-	 */
-	public function setRole($role)
-	{
-		$this->role = static::normalizeString($role);
 		return $this;
 	}
 

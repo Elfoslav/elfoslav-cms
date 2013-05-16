@@ -14,7 +14,7 @@ use Nette\Templating\Filters\Haml,
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {
 	/** @persistent */
-    public $lang;
+    public $lang = 'sk';
 
 	public function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);

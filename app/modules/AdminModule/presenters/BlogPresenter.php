@@ -8,7 +8,7 @@ use \Nette\Application\BadRequestException,
  * Blog presenter
  *
  * @author     Tomáš Hromník
- * @package    ElfoslavNetteSandbox
+ * @package    ElfoslavCMS
  */
 use \Entities\Article;
 
@@ -94,9 +94,9 @@ class BlogPresenter extends SecuredPresenter
 		try {
 			$this->em->flush();
 		} catch (\Exception $e) {
-			$this->flashMessage($this->translator->translate('Vyskytla sa chyba: ' . $e->getMessage()));
+			//TODO: log exception/send mail
+			throw $e;
 		}
-
 		$this->flashMessage($this->translator->translate('Článok vytvorený'));
 		$this->redirect(':Front:Blog:default');
 	}
@@ -125,7 +125,8 @@ class BlogPresenter extends SecuredPresenter
 		try {
 			$this->em->flush();
 		} catch (\Exception $e) {
-			$this->flashMessage($this->translator->translate('Vyskytla sa chyba: ' . $e->getMessage()));
+			//TODO: log exception/send mail
+			throw $e;
 		}
 
 		$this->flashMessage($this->translator->translate('Článok upravený'));

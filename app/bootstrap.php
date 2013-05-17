@@ -49,6 +49,7 @@ $frontRouter[] = new Route('blog/', 'Blog:default');
 $frontRouter[] = new Route('blog[/<slug>]', 'Blog:show');
 $frontRouter[] = new Route('blog/category[/<slug>]', 'Blog:showCategory');
 $frontRouter[] = new Route('blog/tag[/<slug>]', 'Blog:showTag');
+$frontRouter[] = new Route('<slug>', 'Page:show');
 $frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Home:default');
 $frontRouter[] = new Route('blog', 'Blog:default');
 

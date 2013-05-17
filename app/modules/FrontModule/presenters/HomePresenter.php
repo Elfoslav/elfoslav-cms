@@ -14,9 +14,18 @@ class HomePresenter extends \BaseModule\BasePresenter
 {
 
 	public function actionCreateDefaultUser() {
-		$user = new \Entities\User('admin2');
+		$name = 'admin';
+
+		$userRepo = $this->em->getRepository('Entities\User');
+		$existingUser = $userRepo->findOneBy(array('username' => $name));
+		if($existingUser) {
+			$this->sendResponse(new \Nette\Application\Responses\TextResponse('Default user already exists'));
+			$this->terminate();
+		}
+
+		$user = new \Entities\User($name);
 		$user->setPassword($this->getContext()->authenticator->calculateHash('mypassword'));
-		$user->setEmail('your@eail.com')->setRole('admin');
+		$user->setEmail('your@eail.com');
 
 		$this->em->persist($user);
 		try {

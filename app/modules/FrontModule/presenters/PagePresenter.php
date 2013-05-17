@@ -15,11 +15,11 @@ class PagePresenter extends \BaseModule\BasePresenter
 
 	public function renderShow($slug) {
 
-		$page = $this->editablePageRepository->finOneBy(array(
+		$page = $this->editablePageRepository->findOneBy(array(
 			'slug' => $slug
 		));
 
-		if(!$page) {
+		if(!$page || !$page->getPublished()) {
 			throw new BadRequestException('Page not found');
 		}
 

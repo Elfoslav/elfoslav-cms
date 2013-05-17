@@ -2,18 +2,22 @@
 
 namespace AdminModule;
 
-use \Nette\Application\BadRequestException,
-	\Models\PageHelper;
+use Nette\Application\BadRequestException,
+	Models\PageHelper,
+	Entities\Article;;
 /**
  * Blog presenter
  *
  * @author     Tomáš Hromník
  * @package    ElfoslavCMS
  */
-use \Entities\Article;
 
 class BlogPresenter extends SecuredPresenter
 {
+	public function renderDefault() {
+		$this->template->articles = $this->articleRepository->findAll();
+	}
+
 	public function actionUpdate($id) {
 		if(!$id) {
 			throw new BadRequestException('Article id is NULL');
@@ -51,22 +55,7 @@ class BlogPresenter extends SecuredPresenter
 	}
 
 	public function createComponentBaseArticleForm() {
-		$form = new \Nette\Application\UI\Form();
-
-		$form->addText('title', 'Názov článku')
-			->setRequired('Názov je povinný');
-		$form->addTextarea('content', 'Obsah')
-			->setRequired('Obsah je povinný');
-
-		$form->addText('categoriesMultiple', 'Kategórie')
-			->setAttribute('class', 'select2 multiple');
-
-		$form->addText('tagsMultiple', 'Tagy')
-			->setAttribute('class', 'select2 multiple');
-
-		$form->addCheckbox('published', 'publikovať');
-
-		$form->addSubmit('submit', 'Uložiť');
+		$form = new \Forms\ArticleForm;
 
 		return $form;
 	}
@@ -84,6 +73,12 @@ class BlogPresenter extends SecuredPresenter
 		$tagsNames = $values['tagsMultiple'];
 		unset($values['categoriesMultiple'], $values['tagsMultiple']);
 
+		$existingPage = $this->basePageRepository->findOneBy(array('title' => $values['title']));
+		if($existingPage) {
+			$this->flashMessage($this->translator->translate('Stránka s rovnakým názvom už existuje'), 'error');
+			return;
+		}
+
 		$article = new Article();
 		$article->fromArray($values);
 
@@ -98,7 +93,7 @@ class BlogPresenter extends SecuredPresenter
 			throw $e;
 		}
 		$this->flashMessage($this->translator->translate('Článok vytvorený'));
-		$this->redirect(':Front:Blog:default');
+		$this->redirect(':Admin:Blog:default');
 	}
 
 	public function createComponentEditArticleForm() {

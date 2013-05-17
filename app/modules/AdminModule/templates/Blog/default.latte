@@ -1,0 +1,20 @@
+{block content}
+
+<h1 n:block="title">{_'Blog (admin)'}</h1>
+
+<ul>
+	<li n:foreach="$articles as $article">
+		<h2><a n:href=":Front:Blog:show $article->slug">{$article->getTitle()} {dump $article}</a><small>({$article->getPublished() ? 'Zverejnený' : 'Nezverejnený'})</small></h2>
+		<p>{!$article->getContent()}</p>
+		<p>Created at: {$article->getCreated()|date}</p>
+		<p>Updated at: {$article->getUpdated()|date}</p>
+		<p>
+			{_'Kategórie'}:
+			<small n:foreach="$article->getCategories() as $cat">
+				<a n:href=":Front:Blog:showCategory $cat->getSlug()">{$cat->getTitle()}</a>{if !$iterator->last},{/if}
+			</small>
+		</p>
+		<a n:href=":Admin:Blog:update $article->getId()">Update</a>
+		<a n:href=":Admin:Blog:delete $article->getId()">Delete</a>
+	</li>
+</ul>

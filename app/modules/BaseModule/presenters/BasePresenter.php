@@ -104,4 +104,18 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
         $this->tagRepository = $tagRepository;
     }
+
+	/** @var \Repositories\EditablePageRepository */
+	protected $editablePageRepository;
+
+	/**
+	 * @param \Repositories\EditablePageRepository
+	 */
+	public function injectEditablePageRepository(\Repositories\EditablePageRepository $editablePageRepository)
+    {
+		if ($this->editablePageRepository) {
+            throw new Nette\InvalidStateException('EditablePageRepository has already been set');
+        }
+        $this->editablePageRepository = $editablePageRepository;
+    }
 }

@@ -18,12 +18,16 @@ h1 {
 	display: none;
 }
 
-div.flash {
+.flash {
 	color: black;
 	background: #FFF9D7;
 	border: 1px solid #E2C822;
 	padding: 1em;
 	margin: 1em 0;
+}
+
+.error {
+	color: red;
 }
 
 a[href^="error:"] {

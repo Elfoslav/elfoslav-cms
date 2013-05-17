@@ -1,12 +1,12 @@
 {block content}
 
-	<h1 n:block="title">{_'Nový článok'}</h1>
-	{control createArticleForm}
+%h1[n:block => title]
+	{_'Editovať stránku'}
+
+{control editPageForm}
 
 {/block}
 
 {block scripts}
-
 	{include ../includes/@tinymceScript.latte}
-
 {/block}

@@ -54,13 +54,17 @@ common:
 		database: @doctrine.entityManager
 		authenticator: Models\Authenticator( @database::getRepository('Entities\User') )
 		articleRepository:
-			class: \Repositories\ArticleRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Article') )
+			class: Repositories\ArticleRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Article') )
 		articleCategoryRepository:
-			class: \Repositories\ArticleCategoryRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\ArticleCategory') )
+			class: Repositories\ArticleCategoryRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\ArticleCategory') )
 		tagRepository:
-			class: \Repositories\TagRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Tag') )
+			class: Repositories\TagRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Tag') )
 		userRepository:
-			class: \Repositories\UserRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\User') )
+			class: Repositories\UserRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\User') )
+		editablePageRepository:
+			class: Repositories\EditablePageRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\EditablePage') )
+		basePageRepository:
+			class: Repositories\BasePageRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\BasePage') )
 
 	factories:
 

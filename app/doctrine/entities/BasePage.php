@@ -2,37 +2,138 @@
 
 namespace Entities;
 
-use \Doctrine\ORM\Mapping as ORM,
-	\Nette\Utils\Strings;
+use Doctrine\ORM\Mapping as ORM,
+	Nette\Utils\Strings;
 
 /**
- * @author Tomáš Hromník <tom.hromnik@gmail.com>
+ * BasePage
  *
- * Base Page
- *
- * @ORM\MappedSuperclass
+ * @ORM\Entity(repositoryClass="Repositories\BasePageRepository")
+ * @ORM\Table(name="pages_all")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discriminator", type="string")
+ * @ORM\DiscriminatorMap({ "pages_all" = "BasePage", "pages_editable" = "EditablePage", "articles" = "Article" })
  */
-abstract class BasePage extends BaseEntity
+class BasePage extends SlugPage
 {
 	/**
-	 * @ORM\Column(type="string", unique=true)
+	 * @ORM\Column(type="string", unique=true, length=150)
 	 * @var string
 	 */
-	protected $slug;
+	protected $title;
+
+	/**
+	 * @ORM\Column(type="text")
+	 * @var string
+	 */
+	protected $content;
+
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $created;
+
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $updated;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $published;
+
+	public function __construct()
+	{
+		$this->setCreated(new \DateTime());
+		$this->setUpdated(new \DateTime());
+	}
+
+	/**
+	 * @ORM\PreUpdate
+	 */
+	public function setUpdatedValue() {
+		$this->setUpdated(new \DateTime());
+	}
 
 	public function fromArray(Array $arr) {
 		parent::fromArray($arr);
+		$this->setUpdatedValue();
 
 		if(!$this->slug)
 			$this->slug = Strings::webalize($this->title);
 	}
 
-	function setSlug($value){
-        $this->slug = Strings::webalize($value);
+	public function getId() {
+		return $this->id;
+	}
+
+    public function setTitle($value){
+		if(!$this->slug) {
+			$this->setSlug($value);
+		}
+        $this->title = $value;
     }
 
-    function getSlug(){
-        return $this->slug;
+    public function getTitle(){
+        return $this->title;
+    }
+
+    public function setContent($value){
+        $this->content = $value;
+    }
+
+    public function getContent(){
+        return $this->content;
+    }
+
+	public function addCategory($category ){
+		$this->categories[] = $category;
+	}
+
+    public function setCategories($value){
+        $this->categories = $value;
+    }
+
+    public function getCategories(){
+        return $this->categories;
+    }
+
+	public function addTag($tag) {
+		$this->tags[] = $tag;
+	}
+
+	public function setTags($value) {
+		$this->tags = $value;
+	}
+
+	public function getTags() {
+		return $this->tags;
+	}
+
+    public function setCreated($value){
+        $this->created = $value;
+    }
+
+    public function getCreated(){
+        return $this->created;
+    }
+
+    public function setUpdated($value){
+        $this->updated = $value;
+    }
+
+    public function getUpdated(){
+        return $this->updated;
+    }
+
+    public function setPublished($value){
+        $this->published = $value;
+    }
+
+    public function getPublished(){
+        return $this->published;
     }
 
 }

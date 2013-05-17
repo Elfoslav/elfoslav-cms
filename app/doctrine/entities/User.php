@@ -17,13 +17,6 @@ use \Doctrine\ORM\Mapping as ORM;
 class User extends BaseEntity
 {
 	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 * @var int
-	 */
-	private $id;
-	/**
 	 * @ORM\Column(unique=true)
 	 * @var string
 	 */
@@ -46,14 +39,6 @@ class User extends BaseEntity
 	public function __construct($username = NULL)
 	{
 		$this->username = static::normalizeString($username);
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getId()
-	{
-		return $this->id;
 	}
 
 	/**

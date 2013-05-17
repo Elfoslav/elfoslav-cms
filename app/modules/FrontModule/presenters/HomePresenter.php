@@ -1,6 +1,9 @@
 <?php
 
 namespace FrontModule;
+
+use Doctrine\DBAL\Migrations\Migration;
+
 /**
  * Homepage presenter.
  *
@@ -31,7 +34,18 @@ class HomePresenter extends \BaseModule\BasePresenter
 	}
 
 	public function renderDefault() {
+
 		$this->template->articles = $this->articleRepository->findAll();
+	}
+
+	public function renderMigrate() {
+		$migrationConfig = $this->getService('migrations.configuration');
+		$migration = new Migration($migrationConfig);
+		$sql = $migration->migrate();
+		$count = count($sql);
+		dump($sql);
+		$this->sendResponse(new \Nette\Application\Responses\TextResponse($count. ' migrations executed.'));
+		$this->terminate();
 	}
 
 }

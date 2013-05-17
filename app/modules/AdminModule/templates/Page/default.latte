@@ -1,0 +1,18 @@
+{block content}
+
+%h1[n:block => title]
+	{_'Stránky'}
+
+%ul
+	%li[n:foreach => $pages as $page]
+		%h2
+			%a[n:href => :Front:Page:show $page->getSlug()]
+				= $page->getTitle()
+			<small>({$page->getPublished() ? 'Zverejnené' : 'Nezverejnené'})</small>
+		%p
+			{!$page->getContent()}
+		%p
+			%small
+				= $page->getCreated()|date
+
+		<a n:href=":Admin:Page:update $page->getId()">Update</a>

@@ -12,16 +12,8 @@ use \Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Repositories\ArticleCategoryRepository")
  * @ORM\Table(name="articlecategories")
  */
-class ArticleCategory extends BasePage
+class ArticleCategory extends SlugPage
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 * @var int
-	 */
-	private $id;
-
 	/**
 	 * @ORM\Column(type="string", unique=true, length=100)
 	 * @var string
@@ -33,10 +25,6 @@ class ArticleCategory extends BasePage
      * @var array
      **/
 	protected $articles;
-
-	public function getId() {
-		return $this->id;
-	}
 
 	public function setTitle($value) {
 		if(!$this->slug) {

@@ -12,7 +12,9 @@ class BlogPresenter extends \BaseModule\BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->articles = $this->articleRepository->findAll();
+		$this->template->articles = $this->articleRepository->findBy(array(
+			'published' => TRUE
+		));
 	}
 
 	public function renderShow($slug) {

@@ -2,8 +2,8 @@
 
 namespace AdminModule;
 
-use \Nette\Application\UI,
-	\Nette\Security as NS;
+use Nette\Application\UI,
+	Nette\Security as NS;
 
 
 /**

@@ -12,15 +12,8 @@ use \Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Repositories\TagRepository")
  * @ORM\Table(name="tags")
  */
-class Tag extends BasePage
+class Tag extends SlugPage
 {
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue
-	 * @var int
-	 */
-	private $id;
 
 	/**
 	 * @ORM\Column(type="string", unique=true, length=100)
@@ -33,10 +26,6 @@ class Tag extends BasePage
      * @var array
      **/
 	protected $articles;
-
-	public function getId() {
-		return $this->id;
-	}
 
 	public function setTitle($value) {
 		if(!$this->slug) {

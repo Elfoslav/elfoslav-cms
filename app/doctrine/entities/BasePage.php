@@ -132,7 +132,7 @@ class BasePage extends SlugPage
         $this->published = $value;
     }
 
-    public function getPublished(){
+    public function isPublished(){
         return $this->published;
     }
 

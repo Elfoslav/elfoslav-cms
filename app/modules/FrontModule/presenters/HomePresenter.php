@@ -43,7 +43,7 @@ class HomePresenter extends \BaseModule\BasePresenter
 	}
 
 	public function renderDefault() {
-
+		//$this->forward('Blog:');
 		$this->template->articles = $this->articleRepository->findAll();
 	}
 

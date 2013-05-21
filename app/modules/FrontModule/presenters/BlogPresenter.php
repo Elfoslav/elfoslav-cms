@@ -19,7 +19,7 @@ class BlogPresenter extends \BaseModule\BasePresenter
 
 	public function renderShow($slug) {
 		$article = $this->articleRepository->findOneBy(array('slug' => $slug));
-		if(!$article) {
+		if(!$article || !$article->isPublished()) {
 			throw new \Nette\Application\BadRequestException('Article does not exist');
 		}
 		$this->template->article = $article;

@@ -4,7 +4,7 @@
 
 <ul>
 	<li n:foreach="$articles as $article">
-		<h2><a n:href=":Front:Blog:show $article->slug">{$article->getTitle()} {dump $article}</a><small>({$article->getPublished() ? 'Zverejnený' : 'Nezverejnený'})</small></h2>
+		<h2><a n:href=":Front:Blog:show $article->slug">{$article->getTitle()}</a><small>({$article->isPublished() ? 'Zverejnený' : 'Nezverejnený'})</small></h2>
 		<p>{!$article->getContent()}</p>
 		<p>Created at: {$article->getCreated()|date}</p>
 		<p>Updated at: {$article->getUpdated()|date}</p>

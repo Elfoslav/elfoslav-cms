@@ -8,7 +8,7 @@
 		%h2
 			%a[n:href => :Front:Page:show $page->getSlug()]
 				= $page->getTitle()
-			<small>({$page->getPublished() ? 'Zverejnené' : 'Nezverejnené'})</small>
+			<small>({$page->isPublished() ? 'Zverejnené' : 'Nezverejnené'})</small>
 		%p
 			{!$page->getContent()}
 		%p

@@ -8,6 +8,9 @@ Installation:
 Clone or download this repository.
 In project directory run:
 
+`git submodule init`
+`git submodule update`
+
 `composer install`
 
 then

@@ -19,7 +19,7 @@ class PagePresenter extends \BaseModule\BasePresenter
 			'slug' => $slug
 		));
 
-		if(!$page || !$page->isPublished()) {
+		if(!$page || (!$page->isPublished() && !$this->user->isLoggedIn())) {
 			throw new BadRequestException('Page not found');
 		}
 

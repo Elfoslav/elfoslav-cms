@@ -25,7 +25,7 @@ class HomePresenter extends \BaseModule\BasePresenter
 
 		$user = new \Entities\User($name);
 		$user->setPassword($this->getContext()->authenticator->calculateHash('mypassword'));
-		$user->setEmail('your@eail.com');
+		$user->setEmail('your@email.com');
 
 		$this->em->persist($user);
 		try {

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var myConsole = { log : function(text) {} };
+	var console = window.console || myConsole;
 
 	$('.select2.multiple').select2({
 		tags: []
@@ -11,6 +13,16 @@ $(document).ready(function() {
 		$(this).select2({
 			tags: data
 		})
+	});
+
+	/** Set menu title according to page title */
+	var pageName = $('.page-select').text();
+	$('.menu-title').val(pageName);
+
+	$('.menu-form').on('change', '.page-select', function() {
+		var selectedText = $(this).find("option:selected").text();
+		console.log($(this).find("option:selected").text());
+		$('.menu-title').val(selectedText);
 	});
 
 	$('form').on('change', '.select2.multiple', function() {

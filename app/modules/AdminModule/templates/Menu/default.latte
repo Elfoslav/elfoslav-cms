@@ -1,0 +1,13 @@
+{block content}
+
+%h1[n:block => title]
+	Menu
+%ul[n:id => 'hehe']
+	%li[n:foreach => $menus as $menu]
+		%h2
+			%a[n:href => Home:]
+				= $menu->getTitle()
+		%p
+			%a[n:href => Menu:update]
+				{_'Upraviť'}
+			{dump $menu}

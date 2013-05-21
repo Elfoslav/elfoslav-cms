@@ -9,7 +9,7 @@ use Nette\Templating\Filters\Haml,
  * Base class for all application presenters.
  *
  * @author     Tomáš Hromník
- * @package    MyApplication
+ * @package    ElfoslavCMS
  */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {

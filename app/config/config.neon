@@ -65,8 +65,14 @@ common:
 			class: Repositories\EditablePageRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\EditablePage') )
 		basePageRepository:
 			class: Repositories\BasePageRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\BasePage') )
+		menuRepository:
+			class: Repositories\MenuRepository( @doctrine.entityManager, @database::getClassMetadata('Entities\Menu') )
 
 	factories:
+		nette.latte:
+			class: Nette\Latte\Engine
+			setup:
+				- Models\CustomMacros::install(::$service->getCompiler())
 
 
 production < common:

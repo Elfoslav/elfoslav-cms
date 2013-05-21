@@ -44,6 +44,11 @@ class BasePage extends SlugPage
 	 */
 	protected $published;
 
+	/**
+	 * @ORM\OneToOne(targetEntity="Menu", mappedBy="page")
+	 */
+	protected $menu;
+
 	public function __construct()
 	{
 		$this->setCreated(new \DateTime());
@@ -135,5 +140,13 @@ class BasePage extends SlugPage
     public function isPublished(){
         return $this->published;
     }
+
+	public function setMenu($menu) {
+		$this->menu = $menu;
+	}
+
+	public function getMenu() {
+		return $menu;
+	}
 
 }

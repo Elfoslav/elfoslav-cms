@@ -146,7 +146,7 @@ class BasePage extends SlugPage
 	}
 
 	public function getMenu() {
-		return $menu;
+		return $this->menu;
 	}
 
 }

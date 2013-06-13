@@ -45,4 +45,14 @@ class ArticleCategory extends SlugPage
 		return $this->articles;
 	}
 
+	public function getPublishedArticles() {
+		$published = array();
+		foreach($this->articles as $article) {
+			if($article->isPublished()) {
+				$published[] = $article;
+			}
+		}
+		return $published;
+	}
+
 }

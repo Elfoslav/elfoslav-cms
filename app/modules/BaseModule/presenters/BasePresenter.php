@@ -28,13 +28,34 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
         $template->setTranslator($this->translator);
 
+		/** search helper will highlight searched word and shows text around this word */
+		$template->registerHelper('search', function($s, $search, $charCount = 200) {
+			$searchPos = strpos($s, $search);
+
+			$start = (($searchPos - $charCount) < 0) ? 0 : $searchPos - $charCount;
+			$end = $searchPos + $charCount;
+
+			$textLength = strlen($s);
+
+			$s = substr($s, $start, $end);
+			if($start != 0) {
+				$s = '...' . $s;
+			}
+			if($end < $textLength) {
+				$s = $s . '...';
+			}
+
+			$s = str_replace($search, '<strong>' . $search . '</strong>', $s);
+			return $s;
+		});
+
 		return $template;
 	}
 
 	public function templatePrepareFilters($template)
 	{
 		$template->registerFilter(new Haml);
-		$template->registerFilter(new Engine);
+		parent::templatePrepareFilters($template);
 	}
 
 	/** @var Doctrine\ORM\EntityManager */
@@ -105,11 +126,11 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         $this->tagRepository = $tagRepository;
     }
 
-	/** @var \Repositories\EditablePageRepository */
+	/** @var Repositories\EditablePageRepository */
 	protected $editablePageRepository;
 
 	/**
-	 * @param \Repositories\EditablePageRepository
+	 * @param Repositories\EditablePageRepository
 	 */
 	public function injectEditablePageRepository(\Repositories\EditablePageRepository $editablePageRepository)
     {
@@ -117,5 +138,19 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             throw new Nette\InvalidStateException('EditablePageRepository has already been set');
         }
         $this->editablePageRepository = $editablePageRepository;
+    }
+
+	/** @var Repositories\BasePageRepository */
+	protected $basePageRepository;
+
+	/**
+	 * @param Repositories\BasePageRepository
+	 */
+	public function injectBasePageRepository(\Repositories\BasePageRepository $basePageRepository)
+    {
+		if ($this->basePageRepository) {
+            throw new Nette\InvalidStateException('BasePageRepository has already been set');
+        }
+        $this->basePageRepository = $basePageRepository;
     }
 }

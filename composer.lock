@@ -1,5 +1,9 @@
 {
-    "hash": "264f39db06d3d766fd584e032209aa29",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "d49d408e386aec0fc193f200e83add4f",
     "packages": [
         {
             "name": "doctrine/common",
@@ -370,6 +374,59 @@
             "time": "2013-02-18 18:39:06"
         },
         {
+            "name": "nella/forms",
+            "version": "dev-master",
+            "target-dir": "Nella/Forms",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nella/forms.git",
+                "reference": "ee39d631279901b3a623b575c58687dc6f310c97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nella/forms/zipball/ee39d631279901b3a623b575c58687dc6f310c97",
+                "reference": "ee39d631279901b3a623b575c58687dc6f310c97",
+                "shasum": ""
+            },
+            "require": {
+                "nette/nette": "2.0.*",
+                "php": ">=5.3.2"
+            },
+            "type": "nette-addon",
+            "autoload": {
+                "psr-0": {
+                    "Nella\\Forms": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Patrik Votoček",
+                    "email": "patrik@votocek.cz",
+                    "homepage": "http://patrik.votocek.cz",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Nella Project",
+                    "homepage": "http://nella-project.org"
+                }
+            ],
+            "description": "Better HTML5 form support for Nette Framework",
+            "homepage": "http://nellafw.org",
+            "keywords": [
+                "Forms",
+                "HTML5",
+                "addon",
+                "nella",
+                "nette"
+            ],
+            "time": "2012-09-23 04:42:39"
+        },
+        {
             "name": "nette/nette",
             "version": "v2.0.10",
             "source": {
@@ -491,26 +548,32 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.2.1",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "v2.2.1"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "symfony/event-dispatcher": ">=2.1,<3.0"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": ""
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -534,7 +597,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-19 20:48:08"
+            "time": "2013-06-11 07:15:14"
         }
     ],
     "packages-dev": [
@@ -548,6 +611,7 @@
         "nette/nette": 20,
         "nella/doctrine": 20,
         "nella/console": 20,
+        "nella/forms": 20,
         "doctrine/migrations": 20
     },
     "platform": [

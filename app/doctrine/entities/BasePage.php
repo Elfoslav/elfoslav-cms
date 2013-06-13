@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM,
 	Nette\Utils\Strings;
 
 /**
- * BasePage
+ * BasePage - common page for all pages (EditablePage, Article,...)
  *
  * @ORM\Entity(repositoryClass="Repositories\BasePageRepository")
  * @ORM\Table(name="pages_all")
@@ -22,6 +22,12 @@ class BasePage extends SlugPage
 	 * @var string
 	 */
 	protected $title;
+
+	/**
+	 * @ORM\Column(type="text")
+	 * @var string
+	 */
+	protected $description;
 
 	/**
 	 * @ORM\Column(type="text")
@@ -48,6 +54,12 @@ class BasePage extends SlugPage
 	 * @ORM\OneToOne(targetEntity="Menu", mappedBy="page")
 	 */
 	protected $menu;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $viewCount = 0;
 
 	public function __construct()
 	{
@@ -84,6 +96,14 @@ class BasePage extends SlugPage
     public function getTitle(){
         return $this->title;
     }
+
+	public function setDescription($value) {
+		$this->description = $value;
+	}
+
+	public function getDescription() {
+		return $this->description;
+	}
 
     public function setContent($value){
         $this->content = $value;
@@ -147,6 +167,14 @@ class BasePage extends SlugPage
 
 	public function getMenu() {
 		return $this->menu;
+	}
+
+	public function setViewCount($value) {
+		$this->viewCount = $value;
+	}
+
+	public function getViewCount() {
+		return $this->viewCount;
 	}
 
 }

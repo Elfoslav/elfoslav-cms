@@ -21,6 +21,7 @@
 
 		<!-- plugins -->
 		<link rel="stylesheet" href="{$basePath}/select2/select2.css" type="text/css">
+		<link rel="stylesheet" href="{$basePath}/bower/components/bootstrap/docs/assets/css/bootstrap.css" type="text/css">
 		<!-- END plugins -->
 		<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/admin/styles.css" type="text/css">
 		<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
@@ -32,26 +33,33 @@
 
 	<body>
 
+		{include includes/@adminMenu.latte}
+
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-		<div class="cf">
-			<div n:if="$user->isLoggedIn()" class="sidebar">
-				<p><a href="{plink Sign:out}">Logout</a></p>
-				<p><a n:href=":Admin:User:create">+ {_'Nový užívateľ'}</a></p>
-				<p><a n:href=":Admin:User:">{_'Zobraziť užívateľov'}</a></p>
-				<p><a n:href=":Admin:Page:create">+ {_'Nová stránka'}</a></p>
-				<p><a n:href=":Admin:Page:">{_'Zobraziť stránky'}</a></p>
-				<p><a n:href=":Admin:Blog:create">+ {_'Nový článok'}</a></p>
-				<p><a n:href=":Admin:Blog:">{_'Zobraziť články'}</a></p>
-				<p><a n:href=":Admin:Menu:create">+ {_'Vytvoriť menu'}</a></p>
-				<p><a n:href=":Admin:Menu:">{_'Zobraziť menu'}</a></p>
+		.container
+			<div class="cf">
+				<div n:if="$user->isLoggedIn()" class="sidebar">
+					%h3
+						{_'Užívatelia'}
+					<p><a n:href=":Admin:User:create">+ {_'Nový užívateľ'}</a></p>
+					<p><a n:href=":Admin:User:">{_'Zobraziť užívateľov'}</a></p>
+					%h3
+						{_'Stránky'}
+					<p><a n:href=":Admin:Page:create">+ {_'Nová stránka'}</a></p>
+					<p><a n:href=":Admin:Page:">{_'Zobraziť stránky'}</a></p>
+					%h3
+						{_'Blog'}
+					<p><a n:href=":Admin:Blog:create">+ {_'Nový článok'}</a></p>
+					<p><a n:href=":Admin:Blog:">{_'Zobraziť články'}</a></p>
+				</div>
+				<div class="content">
+					{include #content}
+				</div>
 			</div>
-			<div class="content">
-				{include #content}
-			</div>
-		</div>
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{$basePath}/bower/components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
 		<script type="text/javascript" src="{$basePath}/select2/select2.js"></script>
 		<script type="text/javascript" src="{$basePath}/js/admin/scripts.js"></script>

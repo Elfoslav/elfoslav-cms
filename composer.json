@@ -12,6 +12,7 @@
 		"nette/nette": "@dev",
 		"nella/doctrine": "@dev",
 		"nella/console": "@dev",
+		"nella/forms": "@dev",
 		"doctrine/migrations": "@dev",
 		"schmutzka/gettexttranslator": ">= 2.0.2"
 	}

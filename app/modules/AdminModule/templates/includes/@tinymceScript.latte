@@ -1,26 +1,70 @@
 <script type="text/javascript" src="{$basePath}/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" n:syntax="off">
 tinymce.init({
-	selector: "textarea",
+	selector: "textarea.tinymce",
 	plugins: [
 		"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 		"save table contextmenu directionality emoticons template paste textcolor filemanager"
 	],
+	contextmenu: "link image inserttable | cell row column deletetable",
+	link_list: [
+		{title: 'My page 1', value: 'http://www.tinymce.com'},
+		{title: 'My page 2', value: 'http://www.moxiecode.com'}
+	],
+	filemanager_rootpath: '../uploads/',
+	//file_browser_callback: function(field_name, url, type, win) {
+	//	win.document.getElementById(field_name).value = 'my browser value';
+	//},
 	style_formats: [
-		{ title: 'Bold text', inline: 'b'},
-		{ title: 'Red text', inline: 'span', styles: { color: '#ff0000'}},
-		{ title: 'Red header', block: 'h1', styles: { color: '#ff0000'}},
-		{ title: 'Example 1', inline: 'span', classes: 'example1'},
-		{ title: 'Example 2', inline: 'span', classes: 'example2'},
-		{ title: 'Table styles'},
-		{ title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+		{title: 'Headers', items: [
+			{title: 'h1', block: 'h1'},
+			{title: 'h2', block: 'h2'},
+			{title: 'h3', block: 'h3'},
+			{title: 'h4', block: 'h4'},
+			{title: 'h5', block: 'h5'},
+			{title: 'h6', block: 'h6'}
+		]},
+
+		{title: 'Blocks', items: [
+			{title: 'p', block: 'p'},
+			{title: 'div', block: 'div'},
+			{title: 'pre', block: 'pre'}
+		]},
+		{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+		{title: 'Example 1', inline: 'span', classes: 'example1'}
 	],
 	relative_urls: false,
-	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |link image | print preview media fullpage | forecolor backcolor emoticons",
-	width: 800,
+	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+	width: 700,
 	height: 400
 });
+
+tinymce.PluginManager.add("elfinder", function (editor, url) {
+
+	editor.settings.file_browser_callback = function (id, value, type, win) {
+		$('<div />').dialogelfinder({
+			url: url + '/php/connector.php',
+			commandsOptions: {
+				getfile: {
+					oncomplete: 'destroy'
+				}
+			},
+			getFileCallback: function (url)
+			{
+				var fieldElm = win.document.getElementById(id);
+				fieldElm.value = editor.convertURL(url, null, true);
+				if ("fireEvent"in fieldElm) {
+					fieldElm.fireEvent("onchange")
+				} else {
+					var evt = document.createEvent("HTMLEvents");
+					evt.initEvent("change", false, true);
+					fieldElm.dispatchEvent(evt)
+				}
+			}
+		});
+
+}; }, ["elfinder/js"]);
 
 //tinyMCE.init({
 //        // General options

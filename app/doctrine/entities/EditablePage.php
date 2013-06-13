@@ -5,7 +5,7 @@ namespace Entities;
 use \Doctrine\ORM\Mapping as ORM;
 
 /**
- * Editable page
+ * Editable page - page created as Page in administration
  *
  * @ORM\Entity(repositoryClass="Repositories\EditablePageRepository")
  * @ORM\Table(name="pages_editable")

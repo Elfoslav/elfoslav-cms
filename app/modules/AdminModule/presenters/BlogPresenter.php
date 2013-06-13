@@ -20,7 +20,7 @@ class BlogPresenter extends SecuredPresenter
 
 	public function actionUpdate($id) {
 		if(!$id) {
-			throw new BadRequestException('Article id is NULL');
+			throw new BadRequestException('Article id is empty');
 		}
 
 		$article = $this->articleRepository->find($id);
@@ -29,14 +29,21 @@ class BlogPresenter extends SecuredPresenter
 			throw new BadRequestException('Article not found');
 		}
 
-		$this['editArticleForm']->setDefaults($article->toArray());
-		$categoryNames = PageHelper::getPagesNamesString($article->getCategories());
-		$this['editArticleForm']['categoriesMultiple']->setValue($categoryNames)
-			->setAttribute('data-autocomplete', $categoryNames);
+		$defaults = $article->toArray();
 
-		$tagNames = PageHelper::getPagesNamesString($article->getTags());
-		$this['editArticleForm']['tagsMultiple']->setValue($tagNames)
-			->setAttribute('data-autocomplete', $tagNames);
+		$categories = $this->articleCategoryRepository->findAll();
+		$categoryNames = PageHelper::getPagesNamesString($categories);
+		$articleCategories = PageHelper::getPagesNamesString($article->getCategories());
+		$defaults['categoriesMultiple'] = $articleCategories;
+		$this['editArticleForm']['categoriesMultiple']->setAttribute('data-autocomplete', $categoryNames);
+
+		$tags = $this->tagRepository->findAll();
+		$tagNames = PageHelper::getPagesNamesString($tags);
+		$articleTags = PageHelper::getPagesNamesString($article->getTags());
+		$defaults['tagsMultiple'] = $articleTags;
+		$this['editArticleForm']['tagsMultiple']->setAttribute('data-autocomplete', $tagNames);
+
+		$this['editArticleForm']->setDefaults($defaults);
 
 		$this->template->article = $article;
 	}
@@ -112,10 +119,31 @@ class BlogPresenter extends SecuredPresenter
 		unset($values['id'], $values['categoriesMultiple'], $values['tagsMultiple']);
 
 		$article = $this->articleRepository->find($id);
-		$article->fromArray($values);
 
-		$this->createCategories($categoriesNames, $article);
-		$this->createTags($tagsNames, $article);
+		$categoriesNamesArr = PageHelper::getPagesNamesArray($categoriesNames);
+		$article->setCategories(array());
+		foreach($categoriesNamesArr as $catName) {
+			$existingCat = $this->articleCategoryRepository->findOneBy(array('title' => $catName));
+			if($existingCat) {
+				if(!$article->hasCategory($existingCat)) {
+					$article->addCategory($existingCat);
+				}
+			}
+		}
+
+		$article->setTags(array());
+		$tagsNamesArr = PageHelper::getPagesNamesArray($tagsNames);
+		foreach($tagsNamesArr as $tagName) {
+			$existingTag = $this->tagRepository->findOneByTitle($tagName);
+			if($existingTag) {
+				$article->addTag($existingTag);
+			}
+		}
+
+		$newCategories = $this->createCategories($categoriesNames, $article);
+		$newTags = $this->createTags($tagsNames, $article);
+
+		$article->fromArray($values);
 
 		try {
 			$this->em->flush();
@@ -134,10 +162,17 @@ class BlogPresenter extends SecuredPresenter
 	 *
 	 * @param string $categoriesNames - categories names in format "name1,name2,..."
 	 * @param $article
+	 * @return array - empty array if $categoriesNames or $article is empty
+	 * 				   array of Entities\ArticleCategory otherwise
 	 */
 	private function createCategories($categoriesNames, $article) {
+		if(!$categoriesNames || !$article) {
+			return array();
+		}
 		$categoriesArr = PageHelper::getPagesNamesArray($categoriesNames);
 		$categoryRepo = $this->articleCategoryRepository;
+
+		$createdCategories = array();
 		foreach($categoriesArr as $cat) {
 			$category = $categoryRepo->findByTitle($cat);
 			if(!$category) {
@@ -146,8 +181,10 @@ class BlogPresenter extends SecuredPresenter
 				$newCategory->setSlug($cat);
 				$this->em->persist($newCategory);
 				$article->addCategory($newCategory);
+				$createdCategories[] = $newCategory;
 			}
 		}
+		return $createdCategories;
 	}
 
 	/**
@@ -155,10 +192,17 @@ class BlogPresenter extends SecuredPresenter
 	 *
 	 * @param string $tagsNames - tags names in format "name1,name2,..."
 	 * @param $article
+	 * @return array - empty array if $tagsNames or $article is empty
+	 * 				   array of Entities\Tag otherwise
 	 */
 	private function createTags($tagsNames, $article) {
+		if(!$tagsNames || !$article) {
+			return array();
+		}
 		$tagsArr = PageHelper::getPagesNamesArray($tagsNames);
 		$tagRepo = $this->tagRepository;
+
+		$createdTags = array();
 		foreach($tagsArr as $tag) {
 			$tagEntity = $tagRepo->findByTitle($tag);
 			if(!$tagEntity) {
@@ -167,7 +211,9 @@ class BlogPresenter extends SecuredPresenter
 				$newTag->setSlug($tag);
 				$this->em->persist($newTag);
 				$article->addTag($newTag);
+				$createdTags[] = $newTag;
 			}
 		}
+		return $createdTags;
 	}
 }

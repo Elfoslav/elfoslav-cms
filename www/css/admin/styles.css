@@ -1,5 +1,5 @@
 body {
-	font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
+	font: "Trebuchet MS", "Geneva CE", lucida, sans-serif;
 	color: #333;
 	background-color: #fff;
 }
@@ -26,6 +26,24 @@ h1 {
 	margin: 1em 0;
 }
 
+/** ===== Clearfix ===== */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.cf:after {
+    clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+/** ===== END Clearfix ===== */
+
 .error {
 	color: red;
 }
@@ -46,8 +64,38 @@ a[href^="error:"] {
 .sidebar {
 	float: left;
 	margin-right: 35px;
+	width: 165px;
+}
+
+.sidebar a, .content a {
+	text-decoration: underline;
 }
 
 .content {
 	float: left;
+	width: 740px;
+}
+
+/*==============================
+*  === Bootstrap overrides ====
+* ==============================**/
+.navbar .nav,
+.navbar .brand,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+.navbar-inner {
+  text-align:center;
+}
+
+input[type="checkbox"] {
+	margin: 5px;
+}
+label {
+	display: inline;
 }

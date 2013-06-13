@@ -9,6 +9,7 @@ namespace AdminModule;
  */
 abstract class BasePresenter extends \BaseModule\BasePresenter
 {
+
 	/** @var \Repositories\BasePageRepository */
 	protected $basePageRepository;
 

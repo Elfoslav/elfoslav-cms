@@ -5,7 +5,7 @@
 <ul>
 	<li n:foreach="$articles as $article">
 		<h2><a n:href=":Front:Blog:show $article->slug">{$article->getTitle()}</a><small>({$article->isPublished() ? 'Zverejnený' : 'Nezverejnený'})</small></h2>
-		<p>{!$article->getContent()}</p>
+		<div>{!$article->getContent()|truncate:500}</div>
 		<p>Created at: {$article->getCreated()|date}</p>
 		<p>Updated at: {$article->getUpdated()|date}</p>
 		<p>
@@ -15,6 +15,6 @@
 			</small>
 		</p>
 		<a n:href=":Admin:Blog:update $article->getId()">Update</a>
-		<a n:href=":Admin:Blog:delete $article->getId()">Delete</a>
+		<!--<a n:href=":Admin:Blog:delete $article->getId()">Delete</a>-->
 	</li>
 </ul>

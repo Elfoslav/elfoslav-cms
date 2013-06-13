@@ -1,19 +1,12 @@
 {block content}
 
 	<h1 n:block="title">{_'Úprava článku'}</h1>
-	<a n:href=":Front:Blog:">&larr; {_'Všetky články'}</a>
+
 	<a n:href=":Front:Blog:show $article->getSlug()" target="_blank">{_'Preview'}</a>
-	<a n:href=":Admin:Blog:create">{_'Nový článok'}</a>
 
 	{control editArticleForm}
 
-
-	<br>{dump $article}
-	{foreach $article->getCategories() as $cat}
-		{dump $cat}
-	{/foreach}
-
-	<a n:href=":Front:Blog:">&larr; {_'Všetky články'}</a>
+	<a n:href=":Admin:Blog:">&larr; {_'Všetky články'}</a>
 
 {/block}
 

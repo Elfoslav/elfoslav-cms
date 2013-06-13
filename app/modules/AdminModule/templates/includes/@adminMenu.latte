@@ -1,0 +1,42 @@
+.navbar
+	.navbar-inner
+		%a.brand[n:href => Home:]
+			{_'Domov'}
+		%ul.nav[n:if => $user->isLoggedIn()]
+			%li[class => "dropdown {ifCurrent User:*}active{/ifCurrent}"]
+				%a.dropdown-toggle[href => #, data-toggle => dropdown]
+					{_'Užívatelia'}
+					%span.caret
+				%ul.dropdown-menu
+					%li[class => {ifCurrent User:create}active{/ifCurrent}]
+						%a[n:href => User:create]
+							+ {_'Nový užívateľ'}
+					%li[class => {ifCurrent User:}active{/ifCurrent}]
+						%a[n:href => User:]
+							{_'Zobraziť užívateľov'}
+			%li[class => "dropdown {ifCurrent Page:*}active{/ifCurrent}"]
+				%a.dropdown-toggle[href => #, data-toggle => dropdown]
+					{_'Stránky'}
+					%span.caret
+				%ul.dropdown-menu
+					%li[class => {ifCurrent Page:create}active{/ifCurrent}]
+						%a[n:href => Page:create]
+							+ {_'Nová stránka'}
+					%li[class => {ifCurrent Page:}active{/ifCurrent}]
+						%a[n:href => Page:]
+							{_'Zobraziť stránky'}
+			%li[class => "dropdown {ifCurrent Blog:*}active{/ifCurrent}"]
+				%a.dropdown-toggle[href => #, data-toggle => dropdown]
+					{_'Blog'}
+					%span.caret
+				%ul.dropdown-menu
+					%li[class => {ifCurrent Blog:create}active{/ifCurrent}]
+						%a[n:href => Blog:create]
+							+ {_'Nový článok'}
+					%li[class => {ifCurrent Page:}active{/ifCurrent}]
+						%a[n:href => Blog:]
+							{_'Zobraziť články'}
+			%li
+				%a[n:href => Sign:out]
+					%i.icon-off
+					{_'Odhlásiť'}

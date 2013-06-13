@@ -17,10 +17,10 @@ abstract class BasePresenter extends \BaseModule\BasePresenter
 	 * @param \Repositories\BasePageRepository
 	 */
 	public function injectBasePageRepository(\Repositories\BasePageRepository $basePageRepository)
-    {
+	{
 		if ($this->basePageRepository) {
-            throw new Nette\InvalidStateException('BasePageRepository has already been set');
-        }
-        $this->basePageRepository = $basePageRepository;
-    }
+			throw new Nette\InvalidStateException('BasePageRepository has already been set');
+		}
+		$this->basePageRepository = $basePageRepository;
+	}
 }

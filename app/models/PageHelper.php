@@ -11,12 +11,12 @@ namespace Models;
 class PageHelper extends \Nette\Object {
 
 	/**
-      * Static class - cannot be instantiated.
-      */
-    final public function __construct()
-    {
-        throw new Nette\StaticClassException;
-    }
+	  * Static class - cannot be instantiated.
+	  */
+	final public function __construct()
+	{
+		throw new Nette\StaticClassException;
+	}
 
 	/**
 	 * @param array|collection

@@ -89,10 +89,10 @@ class MenuPresenter extends SecuredPresenter
 	 * @param \Repositories\MenuRepository
 	 */
 	public function injectMenuRepository(\Repositories\MenuRepository $menuRepository)
-    {
+	{
 		if ($this->menuRepository) {
-            throw new Nette\InvalidStateException('MenuRepository has already been set');
-        }
-        $this->menuRepository = $menuRepository;
-    }
+			throw new Nette\InvalidStateException('MenuRepository has already been set');
+		}
+		$this->menuRepository = $menuRepository;
+	}
 }

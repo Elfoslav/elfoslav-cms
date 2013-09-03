@@ -14,6 +14,8 @@
 		"nella/console": "@dev",
 		"nella/forms": "@dev",
 		"doctrine/migrations": "@dev",
-		"schmutzka/gettexttranslator": ">= 2.0.2"
+		"schmutzka/gettexttranslator": ">= 2.0.2",
+		"JanMarek/WebLoader": "dev-master",
+		"leafo/lessphp": "dev-master"
 	}
 }

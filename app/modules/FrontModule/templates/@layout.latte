@@ -17,9 +17,10 @@
 	<meta name="description" content="Nette Framework web application skeleton">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 
-	<title>{block title|stripTags}{_'Úvod'}{/block} | Elfoslav Nette Sandbox</title>
+	<title>{block title|stripTags}{_'Úvod'}{/block} | {_'Bikepark Čertov'}</title>
 
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/front/styles.css" type="text/css">
+	{control css 'front/styles.less'}
+
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
 	<script type="text/javascript">
 		var BASE_PATH = {$basePath};
@@ -29,13 +30,20 @@
 
 <body>
 
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	<div class="container">
 
-	{include #content}
+		<div class="header">
+			<h1>Bikepark Čertov</h1>
+		</div>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
-	{block scripts}{/block}
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+		{include #content}
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+		{block scripts}{/block}
+	</div>
 
 </body>
 </html>

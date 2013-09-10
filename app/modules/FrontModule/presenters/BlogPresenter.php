@@ -7,7 +7,7 @@ namespace FrontModule;
  * @author     Tomáš Hromník
  * @package    ElfoslavCMS
  */
-class BlogPresenter extends \BaseModule\BasePresenter
+class BlogPresenter extends BasePresenter
 {
 
 	public function renderDefault()

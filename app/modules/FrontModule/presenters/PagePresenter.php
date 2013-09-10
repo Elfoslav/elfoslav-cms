@@ -10,10 +10,10 @@ use Nette\Application\BadRequestException;
  * @author     Tomáš Hromník
  * @package    ElfoslavCMS
  */
-class PagePresenter extends \BaseModule\BasePresenter
+class PagePresenter extends BasePresenter
 {
 
-	public function renderShow($slug) {
+	public function renderDefault($slug) {
 
 		$page = $this->editablePageRepository->findOneBy(array(
 			'slug' => $slug

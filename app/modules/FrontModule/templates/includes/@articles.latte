@@ -1,15 +1,18 @@
 <ul>
 	<li n:foreach="$articles as $article">
-		<h2><a n:href="Blog:show $article->slug">{$article->getTitle()} {dump $article}</a></h2>
+		<h2 class="title">
+			<a n:href="Blog:show $article->slug">{$article->getTitle()}</a>
+			<span>{$article->getCreated()|date:'d.m.Y'}</span>
+		</h2>
 		<p>{!$article->getContent()}</p>
-		<p>Created at: {$article->getCreated()|date}</p>
-		<p>Updated at: {$article->getUpdated()|date}</p>
-		<p>
+		<!--
+		<p>Updated at: {$article->getUpdated()|date}</p>-->
+		<p n:if="count($article->getCategories())">
 			{_'Kategórie'}:
 			<small n:foreach="$article->getCategories() as $cat">
 				<a n:href="Blog:showCategory $cat->getSlug()">{$cat->getTitle()}</a>{if !$iterator->last},{/if}
 			</small>
 		</p>
-		<a n:href=":Admin:Blog:update $article->getId()">Update</a>
+		<a n:if="$user->isLoggedIn()" n:href=":Admin:Blog:update $article->getId()">Update</a>
 	</li>
 </ul>

@@ -40,6 +40,10 @@ class PagePresenter extends SecuredPresenter
 			return;
 		}
 
+		if(!$values['created']) {
+			$values['created'] = new \DateTime;
+		}
+
 		$newPage = new \Entities\EditablePage();
 		$newPage->fromArray($values);
 

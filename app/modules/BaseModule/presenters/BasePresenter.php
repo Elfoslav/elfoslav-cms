@@ -157,7 +157,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	// BEGIN CSS ---------------------------------------------------------------
 	protected function cssFileCollection($subdir = NULL) {
 		$www = $this->context->params['wwwDir'] . '/css' . ($subdir ? '/' . $subdir : '');
-		$collection = new \WebLoader\FileCollection($www, [ 'css', 'less' ]);
+		$collection = new \WebLoader\FileCollection($www, array('css', 'less'));
 		return $collection;
    }
 

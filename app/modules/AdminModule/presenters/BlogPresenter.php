@@ -88,6 +88,9 @@ class BlogPresenter extends SecuredPresenter
 
 		$article = new Article();
 		$article->fromArray($values);
+		if(!$article->created) {
+			$article->created = new \Nette\DateTime;
+		}
 
 		$this->createCategories($categoriesNames, $article);
 		$this->createTags($tagsNames, $article);

@@ -33,6 +33,8 @@ common:
 		session:
 			autoStart: smart
 			expiration: "+14 days"
+		application:
+			errorPresenter: 'Front:Error'
 
 	doctrine:
 		connection: %database%

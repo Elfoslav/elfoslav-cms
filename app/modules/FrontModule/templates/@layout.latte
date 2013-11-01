@@ -14,28 +14,100 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-	<meta name="description" content="Nette Framework web application skeleton">
+	<meta name="description" content="Downhill, Freeride, Enduro Bikepark Čertov">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 
-	<title>{block title|stripTags}{_'Úvod'}{/block} | Elfoslav Nette Sandbox</title>
+	<title>{block title|stripTags}{_'Downhill, Freeride, Enduro'}{/block} | {_'Bikepark Čertov'}</title>
 
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/front/styles.css" type="text/css">
-	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="{$basePath}/bower/components/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+	{control css 'front/styles.less'}
+
+	<!--<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">-->
 	<script type="text/javascript">
 		var BASE_PATH = {$basePath};
 	</script>
 	{block head}{/block}
+
+	<script n:if="$productionMode" n:syntax="off">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-43921135-1', 'skicertov.sk');
+		ga('send', 'pageview');
+	</script>
 </head>
 
-<body>
+<body {ifCurrent Home:}class="homepage"{/ifCurrent}>
 
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	<div class="container">
+		<ul class="main-nav">
+			<li><a n:href="Home:" {ifCurrent Home:}class="active"{/ifCurrent}>{_'Novinky'}</a></li>
+			<li><a n:href="Page: cennik" {ifCurrent Page: cennik}class="active"{/ifCurrent}>{_'Cenník'}</a></li>
+			<li><a n:href="Page: trate" {ifCurrent Page: trate}class="active"{/ifCurrent}>{_'Trate'}</a></li>
+			<li><a n:href="Gallery:" {ifCurrent Gallery:}class="active"{/ifCurrent}>{_'Galéria'}</a></li>
+			<li><a n:href="Page: ubytovanie" {ifCurrent Page: ubytovanie}class="active"{/ifCurrent}>{_'Ubytovanie'}</a></li>
+			<li><a n:href="Page: kontakt" {ifCurrent Page: kontakt}class="active"{/ifCurrent}>{_'Kontakt'}</a></li>
+		</ul>
+		<div class="clearfix"></div>
+		<div class="header">
+			<div class="logo-wrapper">
+				<h2>Tu bude logo</h2>
+			</div>
+			<div class="header-gallery">
+				<div class="header-gallery-item">
+					<a href="{$basePath}/images/tobogan1.jpg" class="fancybox" data-fancybox-group="header-gallery">
+						<img src="{$basePath}/images/tobogan1.jpg" alt="tobogan 1" />
+					</a>
+				</div>
+				<div class="header-gallery-item">
+					<a href="{$basePath}/images/tobogan2.jpg" class="fancybox" data-fancybox-group="header-gallery">
+						<img src="{$basePath}/images/tobogan2.jpg" alt="tobogan 2" />
+					</a>
+				</div>
+				<div class="header-gallery-item">
+					<a href="{$basePath}/images/tobogan3.jpg" class="fancybox" data-fancybox-group="header-gallery">
+						<img src="{$basePath}/images/tobogan3.jpg" alt="tobogan 3" />
+					</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
 
-	{include #content}
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
-	{block scripts}{/block}
+		<div class="content">
+			{block sidebar}
+				<div class="sidebar">
+					<div class="widget">
+						<h2 class="title">{_'Otváracia doba bikeparku'}</h2>
+						<p>{_'Sobota a nedeľa'} <br /> 12:00 - 17:00</p>
+					</div>
+
+					<div class="widget">
+						<h2 class="title">{_'Počasie'}</h2>
+						<div id='widgetweather' style='width:150px; height:140px;position:relative;'><a href='http://pocasie.aktuality.sk/lazy-pod-makytou/' title='Počasie' id='widgetweatherweather' class='widgetweatherweather' style='display:block !important;'>Počasie Lazy Pod Makytou</a></div><script type='text/javascript' src='http://pocasie.aktuality.sk/pocasie-na-web/weather/lazy-pod-makytou/?w=150&h=140&l=150x140&c=interaktivna&s=0&o=1'></script><link id='widgetcss' rel='stylesheet' type='text/css' media='all' href='http://s.aimg.sk/widget/css/widget150x140.css?v2' />
+					</div>
+				</div>
+			{/block}
+			<div class="main-content">
+				<div class="inner">
+					{include #content}
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{$basePath}/bower/components/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+		<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
+
+		<script type="text/javascript" src="{$basePath}/js/front/scripts.js"></script>
+		{block scripts}{/block}
+	</div>
 
 </body>
 </html>

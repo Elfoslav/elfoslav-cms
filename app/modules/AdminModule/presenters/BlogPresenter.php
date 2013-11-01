@@ -86,6 +86,10 @@ class BlogPresenter extends SecuredPresenter
 			return;
 		}
 
+		if(!$values['created']) {
+			$values['created'] = new \DateTime;
+		}
+
 		$article = new Article();
 		$article->fromArray($values);
 		if(!$article->created) {

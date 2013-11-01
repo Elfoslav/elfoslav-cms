@@ -9,9 +9,9 @@ common:
 		database:
 			driver: pdo_mysql
 			host: localhost
-			dbname: nette_doctrine
-			user: freya
-			password:
+			dbname: bikeparkcertov
+			user: root
+			password: chicooo
 			charset: utf8
 			collation: utf8_czech_ci
 	gettextTranslator:
@@ -83,6 +83,6 @@ production < common:
 development < common:
 	parameters:
 		database:
-			dbname: nette_doctrine
-			user: freya
-			password:
+			dbname: bikeparkcertov
+			user: root
+			password: chicooo

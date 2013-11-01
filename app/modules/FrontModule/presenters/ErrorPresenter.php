@@ -13,7 +13,7 @@ use \Nette\Diagnostics\Debugger,
  * @author     John Doe
  * @package    MyApplication
  */
-class ErrorPresenter extends \BaseModule\BasePresenter
+class ErrorPresenter extends BasePresenter
 {
 
 	/**

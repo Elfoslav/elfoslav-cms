@@ -33,9 +33,20 @@
 					%li[class => {ifCurrent Blog:create}active{/ifCurrent}]
 						%a[n:href => Blog:create]
 							+ {_'Nový článok'}
-					%li[class => {ifCurrent Page:}active{/ifCurrent}]
+					%li[class => {ifCurrent Blog:}active{/ifCurrent}]
 						%a[n:href => Blog:]
 							{_'Zobraziť články'}
+			%li[class => "dropdown {ifCurrent Gallery:*}active{/ifCurrent}"]
+				%a.dropdown-toggle[href => #, data-toggle => dropdown]
+					{_'Galéria'}
+					%span.caret
+				%ul.dropdown-menu
+					%li[class => {ifCurrent Gallery:create}active{/ifCurrent}]
+						%a[n:href => Gallery:create]
+							+ {_'Nová galéria'}
+					%li[class => {ifCurrent Gallery:}active{/ifCurrent}]
+						%a[n:href => Gallery:]
+							{_'Zobraziť galérie'}
 			%li
 				%a[n:href => Sign:out]
 					%i.icon-off

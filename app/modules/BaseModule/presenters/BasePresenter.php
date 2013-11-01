@@ -153,4 +153,20 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 		}
 		$this->basePageRepository = $basePageRepository;
 	}
+
+	// BEGIN CSS ---------------------------------------------------------------
+	protected function cssFileCollection($subdir = NULL) {
+		$www = $this->context->params['wwwDir'] . '/css' . ($subdir ? '/' . $subdir : '');
+		$collection = new \WebLoader\FileCollection($www, array('css', 'less'));
+		return $collection;
+   }
+
+	protected function createComponentCss($name) {
+		$compiler = \WebLoader\Compiler::createCssCompiler($this->cssFileCollection(), $this->context->params['wwwDir'] . '/webtemp');
+		$compiler->setJoinFiles($this->context->params['productionMode']);
+		$compiler->addFileFilter(new \WebLoader\Filter\LessFilter());
+
+		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+	}
+	// END CSS -----------------------------------------------------------------
 }

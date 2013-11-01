@@ -10,7 +10,7 @@ use Doctrine\DBAL\Migrations\Migration;
  * @author     Tomáš Hromník
  * @package    ElfoslavCMS
  */
-class HomePresenter extends \BaseModule\BasePresenter
+class HomePresenter extends BasePresenter
 {
 
 	public function actionCreateDefaultUser() {
